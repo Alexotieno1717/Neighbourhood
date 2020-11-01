@@ -12,7 +12,7 @@ def neighbourhoods(request):
     params = {
         'all_hoods': all_hoods,
     }
-    return render(request, 'neighbourhoods.html', params)
+    return render(request, 'Neighbourhood/neighbourhoods.html', params)
 def create_neighbourhood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
@@ -24,6 +24,7 @@ def create_neighbourhood(request):
     else:
         form = NeighbourHoodForm()
     return render(request, 'newhood.html', {'form': form})
+
 def join_neighbourhood(request, id):
     neighbourhood = get_object_or_404(Neighbourhood, id=id)
     request.user.profile.neighbourhood = neighbourhood
