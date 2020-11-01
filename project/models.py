@@ -1,10 +1,13 @@
 from django.db import models
 from users.models import Profile
+from django.dispatch import receiver
+import datetime as dt
+
 
 # Create your models here.
 class Neighbourhood(models.Model):
-    name = models.Charfield(max_length=100)
-    location = models.Charfield(max_length=100)
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
     admin = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='hood')
     logo = models.ImageField(upload_to='logo/')
     description = models.TextField()
@@ -25,7 +28,7 @@ class Neighbourhood(models.Model):
         return cls.objects.filter(id=neighbourhood_id)
 
 class Business(models.Model):
-    name = models.Charfield(max_length=100)
+    name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     description = models.TextField(blank=True)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='business')
@@ -37,11 +40,11 @@ class Business(models.Model):
     def save_business(self):
         self.save()
 
-    def save_business(self):
-        self.save()
+    def delete_business(self):
+        self.delete()
 
 class Post(models.Model):
-    title = models.Charfield(max_length=100, null=True)
+    title = models.CharField(max_length=100, null=True)
     post = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
@@ -49,3 +52,9 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.title} Post'
+
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
