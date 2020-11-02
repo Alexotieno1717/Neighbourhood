@@ -279,7 +279,7 @@ a.article:hover {
     }
 }
 .btn-custom-nav{
-     background: none rgb(39, 170, 128);
+    background: none rgb(39, 170, 128);
     cursor: pointer;
     color: rgb(255, 255, 255);
     line-height: 1;
