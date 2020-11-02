@@ -142,7 +142,7 @@ LOGIN_REDIRECT_URL = 'hood-home'
 LOGIN_URL = 'login'
 
 cloudinary.config(
-  cloud_name = 'tecweb',
-  api_key = '348647522965963',
-  api_secret = 'Bdlvy6T6oJU1aL4SUxNgYFzCGSU'
+  cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'),
+  api_key = os.environ.get('CLOUDINARY_API_KEY'),
+  api_secret = os.environ.get('CLOUDINARY_API_SECRET')
 )
