@@ -32,3 +32,10 @@ Click the link to visit site
 * Run the application
     * python manage.py runserver 
 * Open the application on your browser 127.0.0.1:8000.
+
+#### Technology used
+* Python3.8.5
+* Django 3.1.2
+* Heroku
+
+#### Known Bugs
