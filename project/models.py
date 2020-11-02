@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Profile
+from cloudinary.models import CloudinaryField
 from django.dispatch import receiver
 import datetime as dt
 
@@ -9,7 +10,7 @@ class Neighbourhood(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     admin = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='hood')
-    neighbourhood_logo = models.ImageField(upload_to='logo/')
+    neighbourhood_logo = CloudinaryField('image')
     description = models.TextField()
     health_number = models.IntegerField(null=True, blank=True)
     police_number = models.IntegerField(null=True, blank=True)
