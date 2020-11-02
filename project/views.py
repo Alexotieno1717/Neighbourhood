@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
 from .forms import BusinessForm, PostForm, NeighbourHoodForm
 from .models import Neighbourhood,Business,Post
+from users.models import Profile
 
 # Create your views here.
 def index(request):
@@ -12,7 +14,8 @@ def neighbourhoods(request):
     params = {
         'all_hoods': all_hoods,
     }
-    return render(request, 'Neighbourhood/neighbourhoods.html', params)
+    return render(request, 'neighbourhood/neighbourhoods.html', params)
+
 def create_neighbourhood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
@@ -23,7 +26,7 @@ def create_neighbourhood(request):
             return redirect('hood')
     else:
         form = NeighbourHoodForm()
-    return render(request, 'newhood.html', {'form': form})
+    return render(request, 'neighbourhood/newhood.html', {'form': form})
 
 def join_neighbourhood(request, id):
     neighbourhood = get_object_or_404(Neighbourhood, id=id)
@@ -37,6 +40,7 @@ def leave_neighbourhood(request, id):
     request.user.profile.neighbourhood = None
     request.user.profile.save()
     return redirect('hood')
+
 def single_neighbourhood(request, hood_id):
     hood = Neighbourhood.objects.get(id=hood_id)
     business = Business.objects.filter(neighbourhood=hood)
@@ -58,7 +62,8 @@ def single_neighbourhood(request, hood_id):
         'form': form,
         'posts': posts
     }
-    return render(request, 'single_hood.html', params)
+    return render(request, 'neighbourhood/single_hood.html', params)
+
 def create_post(request, hood_id):
     hood = Neighbourhood.objects.get(id=hood_id)
     if request.method == 'POST':
@@ -71,4 +76,4 @@ def create_post(request, hood_id):
             return redirect('single-hood', hood.id)
     else:
         form = PostForm()
-    return render(request, 'post.html', {'form': form})
+    return render(request, 'neighbourhood/post.html', {'form': form})
