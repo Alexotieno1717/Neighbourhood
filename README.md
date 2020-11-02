@@ -39,3 +39,4 @@ Click the link to visit site
 * Heroku
 
 #### Known Bugs
+* There are no known bugs currently but pull requests are allowed incase you spot a bug
